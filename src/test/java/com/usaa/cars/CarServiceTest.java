@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 
@@ -42,5 +43,14 @@ class CarServiceTest {
         assertThatThrownBy(
                 () -> carService.getCarDetails("nonExistantCart")
         ).isInstanceOf(CarNotFoundException.class);
+    }
+
+    @Test
+    void addCar_returnsCar() {
+        Car car = new Car("rogue", "xover");
+        when(carRepository.save(any(Car.class))).thenReturn(car);
+        Car newCar = carService.addCar(car);
+        assertThat(newCar).isNotNull();
+        assertThat(newCar).isEqualTo(car);
     }
 }
