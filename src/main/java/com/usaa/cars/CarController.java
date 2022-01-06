@@ -17,6 +17,11 @@ public class CarController {
         return carService.getCarDetails(name);
     }
 
+    @PostMapping("/cars")
+    public Car addNewCar(@RequestBody Car car){
+        return carService.addCar(car);
+    }
+
     @ExceptionHandler
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void carNotFoundHandler(CarNotFoundException e){ }
