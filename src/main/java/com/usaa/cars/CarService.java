@@ -21,6 +21,6 @@ public class CarService {
     }
 
     public Car addCar(Car car) {
-        return null;
+        return carRepository.save(car);
     }
 }
